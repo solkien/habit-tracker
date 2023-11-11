@@ -15,7 +15,7 @@ GRAPH_ID = "graph1"
 GRAPH_ENDPOINT = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs"
 
 
-def args_parser():
+def args_parser() -> argparse.Namespace:
     """Parse arguments"""
     parser = argparse.ArgumentParser(description="Habit Tracker")
 
@@ -47,9 +47,8 @@ def args_parser():
     return parser.parse_args()
 
 
-def create_user():
+def create_user() -> None:
     """Create a new user on Pixela"""
-
     user_params = {
         "token": TOKEN,
         "username": USERNAME,
@@ -65,7 +64,7 @@ def create_user():
     print(response.text)
 
 
-def create_graph():
+def create_graph() -> None:
     """Create a new graph on Pixela"""
     graph_config = {
         "id": GRAPH_ID,
@@ -86,7 +85,7 @@ def create_graph():
     print(response.text)
 
 
-def add_pixel(quantity=0):
+def add_pixel(quantity: int) -> None:
     """Add a new pixel to the graph"""
     pixel_endpoint = f"{GRAPH_ENDPOINT}/{GRAPH_ID}"
     today = datetime.now()
@@ -105,7 +104,7 @@ def add_pixel(quantity=0):
     print(response.text)
 
 
-def update_pixel(date, quantity):
+def update_pixel(date: str, quantity: int) -> None:
     """Update a pixel on the graph"""
     pixel_endpoint = f"{GRAPH_ENDPOINT}/{GRAPH_ID}/{date}"
     pixel_config = {
@@ -123,7 +122,7 @@ def update_pixel(date, quantity):
     print(response.text)
 
 
-def delete_pixel(date):
+def delete_pixel(date: str) -> None:
     """Delete a pixel from the graph"""
     pixel_endpoint = f"{GRAPH_ENDPOINT}/{GRAPH_ID}/{date}"
     headers = {"X-USER-TOKEN": TOKEN, }
@@ -136,7 +135,7 @@ def delete_pixel(date):
     print(response.text)
 
 
-def main():
+def main() -> None:
     args = args_parser()
     if args.create_user:
         create_user()
