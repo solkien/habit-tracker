@@ -141,7 +141,7 @@ def main() -> None:
         create_user()
     elif args.create_graph:
         create_graph()
-    elif args.quantity:
+    elif args.quantity and not args.date:
         add_pixel(args.quantity)
     elif args.date and args.quantity:
         update_pixel(args.date, args.quantity)
